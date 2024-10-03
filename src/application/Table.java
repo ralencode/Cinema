@@ -1,7 +1,11 @@
+package application;
+
 import entities.Entity;
 
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Table<T extends Entity<?>> {
     private final List<T> content;
@@ -41,9 +45,24 @@ public class Table<T extends Entity<?>> {
         return null;
     }
 
+    public List<T> findByField(String fieldName, Object value) {
+        Predicate<T> predicate = entity -> {
+            try {
+                Field field = entity.getClass().getField(fieldName);
+                field.setAccessible(true);
+                Object fieldValue = field.get(entity);
+                return fieldValue != null && fieldValue.equals(value);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                return false;
+            }
+        };
+
+        return content.stream().filter(predicate).toList();
+    }
+
     public void add(T entity) {
         for (int i = content.size() - 1; i >= 0; i--) {
-            int comparison = content.get(i).getPrimaryKey().compareTo(entity.getPrimaryKey());
+            int comparison = ((Comparable<Object>) content.get(i).getPrimaryKey()).compareTo((Comparable<Object>) entity.getPrimaryKey());
             if (comparison <= 0) {
                 if (comparison == 0) content.set(i, entity);
                 else content.add(i + 1, entity);
@@ -55,5 +74,9 @@ public class Table<T extends Entity<?>> {
 
     public List<T> getContent() {
         return List.copyOf(content);
+    }
+
+    public boolean exists(Comparable<?> primaryKey) {
+        return getByPrimaryKey(primaryKey) != null;
     }
 }

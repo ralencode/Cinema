@@ -3,23 +3,23 @@ package entities;
 import java.util.Date;
 
 public class HallManager extends Entity<Integer> {
-    private int employeeId;
+    private int occupationId;
     private int hallId;
     private Date day;
 
-    public HallManager(int id, int employeeId, int hallId, Date day) {
+    public HallManager(int id, int occupationId, int hallId, Date day) {
         this.setPrimaryKey(id);
-        this.setEmployeeId(employeeId);
+        this.setOccupationId(occupationId);
         this.setHallId(hallId);
         this.setDay(day);
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public int getOccupationId() {
+        return occupationId;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setOccupationId(int occupationId) {
+        this.occupationId = occupationId;
     }
 
     public int getHallId() {

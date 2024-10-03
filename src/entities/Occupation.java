@@ -1,16 +1,14 @@
 package entities;
 
-public class Employee extends Entity<Integer> {
+public class Occupation extends Entity<Integer> {
     private String userLogin;
     private float salary;
-    private String password;
     private boolean isAdmin;
 
-    public Employee(int id, String userLogin, float salary, String password, boolean isAdmin) {
+    public Occupation(int id, String userLogin, float salary, boolean isAdmin) {
         this.setPrimaryKey(id);
         this.setUserLogin(userLogin);
         this.setSalary(salary);
-        this.setPassword(password);
         this.setAdmin(isAdmin);
     }
 
@@ -28,14 +26,6 @@ public class Employee extends Entity<Integer> {
 
     public void setSalary(float salary) {
         this.salary = salary;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public boolean isAdmin() {

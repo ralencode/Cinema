@@ -1,21 +1,21 @@
 package entities;
 
 public class SessionManager extends Entity<Integer> {
-    private int employeeId;
+    private int occupationId;
     private int sessionId;
 
-    public SessionManager(int id, int employeeId, int sessionId) {
+    public SessionManager(int id, int occupationId, int sessionId) {
         this.setPrimaryKey(id);
-        this.setEmployeeId(employeeId);
+        this.setOccupationId(occupationId);
         this.setSessionId(sessionId);
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public int getOccupationId() {
+        return occupationId;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setOccupationId(int occupationId) {
+        this.occupationId = occupationId;
     }
 
     public int getSessionId() {
